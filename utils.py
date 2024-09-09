@@ -28,7 +28,7 @@ from IPython.display import display, HTML
 
 def identify_missing_values(dataframe, columns):
    # Replace the '#NULL!' and '?' values in the columns with NaN (missing value)
-    dataframe[columns] = dataframe[columns].replace(["#NULL!", " ?"], np.NaN)
+    dataframe[columns] = dataframe[columns].replace(["#NULL!", " ?"], np.nan)
 
     # Find columns with missing values
     variables_with_na = [col for col in dataframe.columns if dataframe[col].isnull().sum() > 0]
