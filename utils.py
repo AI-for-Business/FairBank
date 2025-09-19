@@ -137,7 +137,7 @@ def show_distribution(dataframe, feature_names: str):
     None
 """
 
-def select_the_features(dataframe, strategy, alpha, n_features, target, chosen_sensitive_features):
+def select_the_features(dataframe, strategy, alpha, target, chosen_sensitive_features):
     
     new_data = pd.DataFrame()
     transform_data = dataframe.drop(chosen_sensitive_features, axis=1)
@@ -154,17 +154,17 @@ def select_the_features(dataframe, strategy, alpha, n_features, target, chosen_s
             new_data[feature] = transform_data[feature]
         new_data[target] = transform_data[target]
 
-    elif strategy == 'PCA':
+    # elif strategy == 'PCA':
           
-        # Initialisieren Sie den PCA-Modell
-        pca = PCA(n_components=n_features)
+    #     # Initialisieren Sie den PCA-Modell
+    #     pca = PCA(n_components=n_features)
 
-        # Führen Sie PCA auf Ihren Daten durch
-        new_data = pd.DataFrame(pca.fit_transform(dataframe.drop(target, axis=1)))
+    #     # Führen Sie PCA auf Ihren Daten durch
+    #     new_data = pd.DataFrame(pca.fit_transform(dataframe.drop(target, axis=1)))
 
-        #  erklärte Varianz durch jede Hauptkomponente
-        explained_variance_ratio = pca.explained_variance_ratio_
-        new_data[target] = dataframe[target]
+    #     #  erklärte Varianz durch jede Hauptkomponente
+    #     explained_variance_ratio = pca.explained_variance_ratio_
+    #     new_data[target] = dataframe[target]
 
  
     new_data = pd.concat((dataframe[chosen_sensitive_features], new_data), axis = 1)
